@@ -1,0 +1,157 @@
+{
+  "info": {
+    "name": "Customs PMM Dashboard API",
+    "description": "API collection for the Customs Performance Measurement Mechanism (PMM) Dashboard prototype.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@customs.gov\",\n  \"password\": \"Password123!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metrics",
+      "item": [
+        {
+          "name": "Summary KPI",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["metrics", "summary"]
+            }
+          }
+        },
+        {
+          "name": "TRS Analysis",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics/trs",
+              "host": ["{{baseUrl}}"],
+              "path": ["metrics", "trs"]
+            }
+          }
+        },
+        {
+          "name": "Revenue Intelligence",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics/revenue",
+              "host": ["{{baseUrl}}"],
+              "path": ["metrics", "revenue"]
+            }
+          }
+        },
+        {
+          "name": "Enforcement & Security",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics/enforcement",
+              "host": ["{{baseUrl}}"],
+              "path": ["metrics", "enforcement"]
+            }
+          }
+        },
+        {
+          "name": "Organizational Scorecard",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics/org",
+              "host": ["{{baseUrl}}"],
+              "path": ["metrics", "org"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shipments & Reference",
+      "item": [
+        {
+          "name": "Anomalies List",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/shipments/anomalies?pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["shipments", "anomalies"],
+              "query": [
+                { "key": "pageSize", "value": "10" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "YOUR_JWT_TOKEN",
+      "type": "string"
+    }
+  ]
+}
