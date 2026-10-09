@@ -36,19 +36,23 @@ app.use('/api/v1', aiRoutes);
 // Global Error Handler
 import { errorHandler } from './middleware/errorHandler';
 app.use(errorHandler);
-app.listen(port, () => {
-  console.log(`[PMM Backend] Server running on port ${port}`);
-  console.log(`[PMM Backend] CORS origin: ${process.env.CORS_ORIGIN || 'http://localhost:5173'}`);
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`[PMM Backend] Server running on port ${port}`);
+    console.log(`[PMM Backend] CORS origin: ${process.env.CORS_ORIGIN || 'http://localhost:5173'}`);
 
-  pool.getConnection()
-    .then((conn) => {
-      console.log('[PMM Backend] Database connected successfully to MySQL.');
-      conn.release();
-    })
-    .catch((err) => {
-      console.error('[PMM Backend] WARNING: Database connection failed!');
-      console.error('[PMM Backend] Error:', err.message);
-      console.error('[PMM Backend] Please verify DATABASE_URL in backend/.env with your MySQL credentials.');
-    });
-});
+    pool.getConnection()
+      .then((conn) => {
+        console.log('[PMM Backend] Database connected successfully to MySQL.');
+        conn.release();
+      })
+      .catch((err) => {
+        console.error('[PMM Backend] WARNING: Database connection failed!');
+        console.error('[PMM Backend] Error:', err.message);
+        console.error('[PMM Backend] Please verify DATABASE_URL in backend/.env with your MySQL credentials.');
+      });
+  });
+}
+
+export default app;
 
