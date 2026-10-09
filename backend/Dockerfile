@@ -8,6 +8,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-EXPOSE 5000
+ENV PORT=7860
+EXPOSE 7860
 
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]
